@@ -6,14 +6,14 @@
 %define	pdir	URI
 %define	pnam	Find
 Summary:	URI::Find - Find URIs in arbitrary text
-#Summary(pl.UTF-8):	
+Summary(pl.UTF-8):	URI::Find - znajdowanie URI w dowolnym tekście
 Name:		perl-URI-Find
 Version:	0.16
 Release:	1
 # same as perl
 License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
-Source0:	http://www.cpan.org/modules/by-authors/id/R/RO/ROSCH/URI-Find-0.16.tar.gz
+Source0:	http://www.cpan.org/modules/by-authors/id/R/RO/ROSCH/%{pdir}-%{pnam}-%{version}.tar.gz
 # Source0-md5:	339279e268cf37e629f54c1091f99a13
 URL:		http://search.cpan.org/dist/URI-Find/
 BuildRequires:	perl-devel >= 1:5.8.0
@@ -25,14 +25,17 @@ BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-This module does one thing: Finds URIs and URLs in plain text.  It finds
-them quickly and it finds them all (or what URI::URL considers a URI
-to be.)  It only finds URIs which include a scheme (http:// or the
+This module does one thing: Finds URIs and URLs in plain text. It
+finds them quickly and it finds them all (or what URI::URL considers a
+URI to be.) It only finds URIs which include a scheme (http:// or the
 like), for something a bit less strict have a look at
 URI::Find::Schemeless.
 
-# %description -l pl.UTF-8
-# TODO
+%description -l pl.UTF-8
+Ten moduł robi jedną rzecz: znajduje URI i URL-e w czystym tekście.
+Znajduje je szybko i znajduje je wszystkie (lub cokolwiek co URI::URL
+uzna za URI). Znajduje tylko URI zawierające schemat (http:// itp.),
+natomiast coś mniej ścisłego można znaleźć w URI::Find::Schemeless.
 
 %prep
 %setup -q -n %{pdir}-%{pnam}-%{version}
