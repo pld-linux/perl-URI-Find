@@ -2,7 +2,6 @@
 # Conditional build:
 %bcond_without	tests		# do not perform "make test"
 #
-%include	/usr/lib/rpm/macros.perl
 %define	pdir	URI
 %define	pnam	Find
 Summary:	URI::Find - Find URIs in arbitrary text
