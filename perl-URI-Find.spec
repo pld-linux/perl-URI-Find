@@ -8,7 +8,7 @@ Summary:	URI::Find - Find URIs in arbitrary text
 Summary(pl.UTF-8):	URI::Find - znajdowanie URI w dowolnym tekście
 Name:		perl-URI-Find
 Version:	0.16
-Release:	1
+Release:	2
 # same as perl
 License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
