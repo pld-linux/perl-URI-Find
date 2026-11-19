@@ -7,18 +7,20 @@
 Summary:	URI::Find - Find URIs in arbitrary text
 Summary(pl.UTF-8):	URI::Find - znajdowanie URI w dowolnym tekście
 Name:		perl-URI-Find
-Version:	0.16
-Release:	2
+Version:	20160806
+Release:	1
 # same as perl
 License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
-Source0:	http://www.cpan.org/modules/by-authors/id/R/RO/ROSCH/%{pdir}-%{pnam}-%{version}.tar.gz
-# Source0-md5:	339279e268cf37e629f54c1091f99a13
+Source0:	http://www.cpan.org/modules/by-authors/id/M/MS/MSCHWERN/%{pdir}-%{pnam}-%{version}.tar.gz
+# Source0-md5:	744411a9fe3865f8f580b1b5fea8c7e5
 URL:		http://search.cpan.org/dist/URI-Find/
-BuildRequires:	perl-devel >= 1:5.8.0
+BuildRequires:	perl-Module-Build >= 0.30
+BuildRequires:	perl-devel >= 1:5.8.8
 BuildRequires:	rpm-perlprov >= 4.1-13
+BuildRequires:	perl-URI >= 1.60
 %if %{with tests}
-BuildRequires:	perl-URI >= 1.00
+BuildRequires:	perl-Test-Simple >= 0.88
 %endif
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -39,18 +41,20 @@ natomiast coś mniej ścisłego można znaleźć w URI::Find::Schemeless.
 %prep
 %setup -q -n %{pdir}-%{pnam}-%{version}
 
-%build
-%{__perl} Makefile.PL \
-	INSTALLDIRS=vendor
-%{__make}
+%{__sed} -i -e '1s,#!.*/perl,#!%{__perl},' bin/urifind
 
-%{?with_tests:%{__make} test}
+%build
+%{__perl} Build.PL \
+	installdirs=vendor \
+	destdir=$RPM_BUILD_ROOT
+./Build
+
+%{?with_tests:./Build test}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+./Build install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -60,4 +64,5 @@ rm -rf $RPM_BUILD_ROOT
 %doc Changes README TODO
 %{perl_vendorlib}/URI/*.pm
 %{perl_vendorlib}/URI/Find
+%attr(755,root,root) %{_bindir}/urifind
 %{_mandir}/man3/*
